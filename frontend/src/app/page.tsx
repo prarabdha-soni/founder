@@ -178,7 +178,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-gray-100 font-sans antialiased">
       {/* Header */}
       <header className="flex items-center justify-between px-8 py-4 bg-white shadow-sm border-b border-gray-200">
-        <div className="text-xl font-bold text-gray-900">Stree - AI Personal Assistant for CXO's</div>
+        <div className="text-xl font-bold text-gray-900">Stree - AI Personal Assistant for CXO&apos;s</div>
         <nav className="hidden md:flex items-center space-x-8">
           <a href="#" className="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors">Dashboard</a>
            <a href="#" className="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors">Decisions</a>
