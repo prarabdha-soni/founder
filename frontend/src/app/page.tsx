@@ -178,7 +178,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-gray-100 font-sans antialiased">
       {/* Header */}
       <header className="flex items-center justify-between px-8 py-4 bg-white shadow-sm border-b border-gray-200">
-        <div className="text-xl font-bold text-gray-900">FounderMate</div>
+        <div className="text-xl font-bold text-gray-900">Stree - AI Personal Assistant for CXO's</div>
         <nav className="hidden md:flex items-center space-x-8">
           <a href="#" className="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors">Dashboard</a>
            <a href="#" className="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors">Decisions</a>
@@ -204,7 +204,7 @@ export default function Home() {
           {/* Welcome Section */}
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800">Good morning, Sara</h1>
+              <h1 className="text-2xl font-bold text-gray-800">Good morning, Atish</h1>
               <div className="mt-4 bg-gray-50 p-4 rounded-lg flex items-center justify-between">
                 <div>
                   <h3 className="font-semibold text-gray-800">Custom AI co-founder for your startup</h3>
