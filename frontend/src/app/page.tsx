@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 // import Image from "next/image";
 
 // Define a type for Task based on the backend schema
@@ -12,13 +12,6 @@ interface Task {
   completed: boolean;
   created_at: string; // Assuming date comes as string
   updated_at: string; // Assuming date comes as string
-}
-
-interface Decision {
-  id: number;
-  description: string;
-  date: string;
-  progress: number; // Percentage
 }
 
 interface MemoryItem {
@@ -51,13 +44,6 @@ interface DecisionHistoryItem {
 
 export default function Home() {
   // --- Dummy Data --- //
-
-  const initialDecisionMemory: Decision[] = [
-    // Updated dummy data for relevant industries
-    { id: 1, description: "Approved strategic partnership with local bank\nAccelerate loan book growth", date: "Mar 10", progress: 95 },
-    { id: 2, description: "Launched new digital insurance product\nTargeting young adults", date: "Feb 25", progress: 85 },
-    { id: 3, description: "Integrated new CRM for broking operations\nImproved client management", date: "Jan 15", progress: 90 },
-  ];
 
   const initialCoFounderChecks: MemoryItem[] = [
     // Updated dummy data for relevant industries
@@ -130,36 +116,6 @@ export default function Home() {
 
   const [tasks, setTasks] = useState<Task[]>(initialTodaysTasks); // Start with dummy tasks
   const [newTaskDescription, setNewTaskDescription] = useState('');
-  const [decisionMemoryData, setDecisionMemoryData] = useState<Decision[]>(initialDecisionMemory);
-  const [coFounderChecksData, setCoFounderChecksData] = useState<MemoryItem[]>(initialCoFounderChecks);
-  const [strategicPrioritiesData, setStrategicPrioritiesData] = useState<StrategicPriority[]>(initialStrategicPriorities);
-  const [investorsSectionData, setInvestorsSectionData] = useState<MemoryItem[]>(initialInvestorsSection);
-  const [recentMemoryData, setRecentMemoryData] = useState<MemoryItem[]>(initialRecentMemory);
-  const [recentDocumentsData, setRecentDocumentsData] = useState<DocumentItem[]>(initialRecentDocuments);
-  const [decisionHistoryData, setDecisionHistoryData] = useState<DecisionHistoryItem[]>(initialDecisionHistory);
-
-  // Remove userBusinessType state
-  // const [userBusinessType, setUserBusinessType] = useState<'lending' | 'insurance' | 'broking'>('lending'); // Default to lending
-
-  // --- Effects (for potential backend integration later) --- //
-
-  // useEffect(() => {
-  //   const fetchTasks = async () => {
-  //     try {
-  //       const response = await fetch('/api/tasks/?user_id=founder1'); // Fetch tasks for a user
-  //       if (response.ok) {
-  //         const tasksData: Task[] = await response.json();
-  //         setTasks(tasksData); // Update state with fetched tasks
-  //       } else {
-  //         console.error('Failed to fetch tasks:', response.statusText);
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching tasks:', error);
-  //     }
-  //   };
-
-  //   fetchTasks();
-  // }, []); // Empty dependency array ensures this runs only once on mount
 
   // --- Event Handlers --- //
 
@@ -245,23 +201,6 @@ export default function Home() {
         {/* Left Column */}
         <div className="md:col-span-2 flex flex-col gap-8">
 
-          {/* Remove Business Type Selector (for demonstration) */}
-          {/* <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex items-center space-x-4">
-              <span className="text-gray-700 font-medium">Select Business Type:</span>
-              <button 
-                  className={`px-3 py-1 rounded-md text-sm font-medium ${userBusinessType === 'lending' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-                  onClick={() => setUserBusinessType('lending')}
-              >Lending</button>
-              <button 
-                  className={`px-3 py-1 rounded-md text-sm font-medium ${userBusinessType === 'insurance' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-                  onClick={() => setUserBusinessType('insurance')}
-              >Insurance</button>
-              <button 
-                  className={`px-3 py-1 rounded-md text-sm font-medium ${userBusinessType === 'broking' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-                  onClick={() => setUserBusinessType('broking')}
-              >Broking</button>
-          </div> */}
-
           {/* Welcome Section */}
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center justify-between">
             <div>
@@ -299,7 +238,7 @@ export default function Home() {
 
                 {/* Map over months and decisions */}
                  {/* Group decisions by month */}
-                {Object.entries(decisionHistoryData.reduce((acc, decision) => {
+                {Object.entries(initialDecisionHistory.reduce((acc, decision) => {
                      acc[decision.month] = [...(acc[decision.month] || []), decision];
                      return acc;
                  }, {} as Record<string, DecisionHistoryItem[]>)).map(([month, decisions]) => (
@@ -332,7 +271,7 @@ export default function Home() {
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Co-Founder Checks</h2>
              <div className="space-y-3">
-               {coFounderChecksData.map(item => (
+               {initialCoFounderChecks.map(item => (
                   <div key={item.id} className="flex items-start text-gray-700">
                      <span className="mr-3 text-xl text-blue-500">{item.icon}</span>
                      <span className="leading-snug">{item.description}</span>
@@ -345,7 +284,7 @@ export default function Home() {
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Recent Memory</h2>
             <div className="space-y-3">
-              {recentMemoryData.map(item => (
+              {initialRecentMemory.map(item => (
                 <div key={item.id} className="flex items-center text-gray-700">
                   <span className="mr-3 text-xl text-green-600">{item.icon}</span>
                   <span>{item.description}</span>
@@ -360,7 +299,7 @@ export default function Home() {
         <div className="md:col-span-1 flex flex-col gap-8">
           {/* Today's Tasks */}
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-            <h2 className="text-xl font-bold text-gray-800 mb-4">Today's Tasks</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-4">Today&apos;s Tasks</h2>
             <div className="space-y-3">
               {/* Map over the tasks state */}
               {tasks.map(task => (
@@ -452,7 +391,7 @@ export default function Home() {
            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Strategic Priorities</h2>
              <div className="space-y-3">
-               {strategicPrioritiesData.map(item => (
+               {initialStrategicPriorities.map(item => (
                  <div key={item.id} className="flex items-center justify-between border-b border-gray-200 pb-3 last:border-b-0 last:pb-0">
                      <div className="flex items-center text-gray-700">
                         <span className="mr-3 text-xl text-yellow-500">⭐</span>
@@ -473,7 +412,7 @@ export default function Home() {
            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Investors</h2>
              <div className="space-y-3">
-               {investorsSectionData.map(item => (
+               {initialInvestorsSection.map(item => (
                  <div key={item.id} className="flex items-start text-gray-700">
                      <span className="mr-3 text-xl text-blue-500">{item.icon}</span>
                     <span>{item.description.split('\n')[0]}<br/>{item.description.split('\n')[1]}</span>
@@ -491,7 +430,7 @@ export default function Home() {
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h2 className="text-xl font-bold text-gray-800 mb-4">Recent Documents</h2>
             <div className="space-y-3">
-              {recentDocumentsData.map(doc => (
+              {initialRecentDocuments.map(doc => (
                  <div key={doc.id} className="flex items-center text-gray-700">
                     <span className="mr-3 text-xl text-orange-500">{doc.icon}</span>
                     <span>{doc.filename}</span>
